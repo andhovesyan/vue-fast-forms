@@ -3,7 +3,7 @@
   <nav id="topbar" class="navbar navbar-full fixed-top navbar-light bg-faded">
     <div class="container">
       <a class="navbar-brand" href="#">Vue.js Fast Forms</a>
-      <a id="githubBtn" class="float-right">
+      <a id="githubBtn" class="float-right" href="https://github.com/Hovesyan/vue-fast-forms">
         <vf-icon icon="star" /> Github
       </a>
     </div>
