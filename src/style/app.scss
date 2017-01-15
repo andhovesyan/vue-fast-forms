@@ -1,0 +1,233 @@
+$font-family-sans-serif: "Source Sans Pro", -apple-system, system-ui, BlinkMacSystemFont,
+  "Segoe UI", "Roboto", "Helvetica Neue", Arial, sans-serif;
+
+$fa-font-path: "../../node_modules/font-awesome/fonts";
+
+@import "node_modules/font-awesome/scss/font-awesome";
+@import "node_modules/bootstrap/scss/bootstrap";
+@import "node_modules/tether/dist/css/tether";
+
+@font-face {
+  font-family: "M+ 2m";
+  src: url("/fonts/mplus-2m-regular.eot");
+  src:
+    url("/fonts/mplus-2m-regular.eot?#iefix") format("embedded-opentype"),
+    url("/fonts/mplus-2m-regular.woff") format("woff"),
+    url("/fonts/mplus-2m-regular.ttf") format("truetype");
+}
+
+html {
+  overflow-y: scroll;
+}
+
+body {
+  background: #fff;
+  padding-top: 4rem;
+}
+
+pre,
+code {
+  font-family: "M+ 2m", monospace !important;
+  margin: 0;
+  border-radius: inherit;
+}
+
+.navbar {
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.code-block {
+  background: #F7F7F9;
+}
+
+.tag {
+  font-size: 100% !important;
+}
+
+.card-example {
+  border-color: #D8D8D8;
+  border-radius: .1rem;
+  overflow: hidden;
+  padding-top: 1.75rem;
+
+  &::before {
+    position: absolute;
+    left: 0;
+    top: 0;
+    padding: 1em;
+    color: #aaa;
+    font-size: smaller;
+    font-weight: 500;
+    content: "EXAMPLE";
+  }
+}
+
+.tag {
+  padding: 0.15rem 0 !important;
+  font-weight: 600 !important;
+}
+
+h1, h2, h3 {
+  font-weight: 300;
+}
+
+.form-control {
+  box-shadow: none!important;
+}
+
+.datepicker {
+  .calendar {
+    border-radius: $border-radius;
+  }
+
+  .cell:not(.day-header) {
+    border-radius: $border-radius;
+
+    &:hover:not(.blank):not(.disabled):not(.selected) {
+      background: $brand-primary;
+      border: 1px solid $brand-primary;
+      color: #fff;
+    }
+
+    &.selected {
+      background: lighten($brand-primary, 10%);
+      color: #fff;
+    }
+  }
+
+  .form-control:not(.readonly) {
+    background: $input-bg;
+  }
+}
+
+
+.block.custom-control.custom-radio {
+  display: block;
+  margin-left: 0;
+}
+
+$cell-width: 100% / 7;
+
+.datepicker {
+  position: relative;
+}
+
+.calendar {
+  padding: 0 .5rem .5rem;
+  position: absolute;
+  z-index: 100;
+  background: #fff;
+  width: 320px;
+  border: 1px solid #ccc;
+  &.align-right {
+    right: 0;
+  }
+  &.align-left {
+    left: 0;
+  }
+
+  header {
+    display: block;
+    line-height: 40px;
+
+    span {
+      display: inline-block;
+      text-align: center;
+      width: calc(71.42857142857143% + 1rem);
+      float: left;
+    }
+
+    .prev,
+    .next {
+      width: 14.285714285714286%;
+      float: left;
+      text-indent: -10000px;
+      position: relative;
+      &:after {
+        content: '';
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translateX(-50%) translateY(-50%);
+        border: 6px solid transparent;
+      }
+    }
+
+    .prev {
+      margin-left: -.5rem;
+      &:after {
+        border-right: 10px solid #000;
+        margin-left: -5px;
+      }
+      &.disabled:after {
+        border-right: 10px solid #ddd;
+      }
+    }
+
+    .next {
+      margin-right: -.5rem;
+      &:after {
+        border-left: 10px solid #000;
+        margin-left: 5px;
+      }
+      &.disabled:after {
+        border-left: 10px solid #ddd;
+      }
+    }
+
+    .prev:not(.disabled),
+    .next:not(.disabled),
+    .up:not(.disabled) {
+      cursor: pointer;
+      &:hover {
+        background: #eee;
+      }
+    }
+  }
+
+  .disabled {
+    color: #ddd;
+    cursor: default;
+  }
+
+  .cell {
+    float: left;
+    display: inline-block;
+    padding: 0 5px;
+    width: calc(14.28% - .25rem);
+    margin: .125rem;
+    height: 2.35rem;
+    line-height: 2.3rem;
+    text-align: center;
+    vertical-align: middle;
+    border: 1px solid transparent;
+
+    &:not(.blank):not(.disabled) {
+      &.day,
+      &.month,
+      &.year {
+        cursor: pointer;
+      }
+    }
+
+    &.grey {
+      color: #888;
+      &:hover {
+        background: inherit;
+      }
+    }
+
+    &.day-header {
+      font-size: 75%;
+      cursor: inherit;
+      &:hover {
+        background: inherit;
+      }
+    }
+  }
+
+  .month,
+  .year {
+    width: calc(33.333% - .25rem);
+  }
+}
