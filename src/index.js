@@ -16,7 +16,7 @@ import {
     vfDatepicker,
     vfAddon,
     vfHelp,
-} from 'vue-bootstrap-forms';
+} from 'vue-fast-forms';
 
 Vue.component('vf-btn', vfButton);
 Vue.component('vf-checkbox', vfCheckbox);

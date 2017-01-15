@@ -10,7 +10,7 @@
   "dependencies": {
     "bootstrap": "^4.0.0-alpha.6",
     "moment": "^2.17.1",
-    "vue": "^2.1.8",
+    "vue": "^2.1.8"
   },
   "main": "dist/vue-fast-form.js",
   "devDependencies": {
@@ -46,7 +46,7 @@
     "webpack": "2.2.0-rc.4",
     "webpack-dev-server": "^2.2.0-rc.0"
   },
-  "version": "0.0.1",
+  "version": "0.0.5",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Hovesyan/vue-fast-forms.git"
@@ -55,5 +55,5 @@
   "bugs": {
     "url": "https://github.com/Hovesyan/vue-fast-forms/issues"
   },
-  "homepage": "https://github.com/Hovesyan/vue-fast-forms#readme"
+  "homepage": "http://vue-fast-forms.hovesyan.pro/"
 }

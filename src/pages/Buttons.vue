@@ -1,7 +1,6 @@
 <template>
 <div>
   <h1 class="mb-3">Buttons</h1>
-  <p>Tag: <code>&lt;vf-btn /&gt;</code></p>
   <p>Properties: <code>text</code>, <code>vf-color</code>, <code>vf-size</code>, <code>vf-type</code>, <code>disabled</code>, <code>active</code>, <code>block</code>, <code>href</code>, <code>to</code></p>
   <p>Events: <code>@click</code>, <code>@dbclick</code>, <code>@focus</code>, <code>@blur</code>
   <doc-section title="Button styling">

@@ -9,11 +9,11 @@ $fa-font-path: "../../node_modules/font-awesome/fonts";
 
 @font-face {
   font-family: "M+ 2m";
-  src: url("/fonts/mplus-2m-regular.eot");
+  src: url("/docs/fonts/mplus-2m-regular.eot");
   src:
-    url("/fonts/mplus-2m-regular.eot?#iefix") format("embedded-opentype"),
-    url("/fonts/mplus-2m-regular.woff") format("woff"),
-    url("/fonts/mplus-2m-regular.ttf") format("truetype");
+    url("/docs/fonts/mplus-2m-regular.eot?#iefix") format("embedded-opentype"),
+    url("/docs/fonts/mplus-2m-regular.woff") format("woff"),
+    url("/docs/fonts/mplus-2m-regular.ttf") format("truetype");
 }
 
 html {

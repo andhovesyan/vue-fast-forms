@@ -5,12 +5,12 @@ module.exports = {
   entry: {
     main: './src/index.js',
     vendor: ['vue', 'vue-router'],
-    lib: 'vue-bootstrap-forms',
+    lib: 'vue-fast-forms',
   },
   output: {
-    publicPath: '/dist/',
+    publicPath: '/docs/',
     filename: '[name].js',
-    path: path.resolve(__dirname, './dist'),
+    path: path.resolve(__dirname, './docs'),
   },
   resolveLoader: {
     modules: [path.join(__dirname, '../node_modules')],
@@ -18,7 +18,7 @@ module.exports = {
   resolve: {
     alias: {
       vue: 'vue/dist/vue.js',
-      'vue-bootstrap-forms': path.join(__dirname, '../src/lib'),
+      'vue-fast-forms': path.join(__dirname, '../src/lib'),
     }
   },
   module: {
@@ -30,7 +30,7 @@ module.exports = {
       loader: 'babel-loader',
       exclude: /node_modules/,
     }, {
-      test: /\.(png|jpg|gif|svg)$/,
+      test: /\.(png|jpg|gif)$/,
       loader: 'file-loader',
       query: {
         name: '[name].[ext]?[hash]',
