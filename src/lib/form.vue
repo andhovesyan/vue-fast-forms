@@ -32,7 +32,6 @@ export default {
       if (this.inputs[input.name]) {
         return;
       }
-      console.log(input.name);
       const data = {};
       data[input.name] = input;
       this.inputs = Object.assign({}, this.inputs, data);

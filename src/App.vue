@@ -3,7 +3,7 @@
   <nav id="topbar" class="navbar navbar-full fixed-top navbar-light bg-faded">
     <div class="container">
       <a class="navbar-brand" href="#">Vue.js Fast Forms</a>
-      <a id="githubBtn" class="float-right" href="https://github.com/Hovesyan/vue-fast-forms">
+      <a id="githubBtn" class="float-right" target="_blank" href="https://github.com/Hovesyan/vue-fast-forms">
         <vf-icon icon="star" /> Github
       </a>
     </div>
@@ -51,22 +51,26 @@
 </template>
 
 <script>
+
 import $ from 'jquery';
+
 export default {
 
   name: 'App',
 
   created() {
-    const $window = $(window);
-    $window.on('scroll', () => {
-      if ($window.scrollTop() > 60) {
-        $('#sideNav').addClass('scrolled');
-        $('#topbar').addClass('scrolled');
-      } else {
-        $('#sideNav').removeClass('scrolled');
-        $('#topbar').removeClass('scrolled');
-      }
-    });
+    if (!this.$isServer) {
+      const $window = $(window);
+      $window.on('scroll', () => {
+        if ($window.scrollTop() > 60) {
+          $('#sideNav').addClass('scrolled');
+          $('#topbar').addClass('scrolled');
+        } else {
+          $('#sideNav').removeClass('scrolled');
+          $('#topbar').removeClass('scrolled');
+        }
+      });
+    }
   },
   watch: {
     $route() {
@@ -83,6 +87,7 @@ export default {
 #githubBtn {
   background: lighten(#2196f3, 5%);
   border-radius: .15rem;
+  color: #fff;
   font-weight: 400;
   padding: 0 1rem;
   line-height: 2.9rem;
@@ -96,6 +101,7 @@ export default {
   &:hover {
     background: darken(#2196f3, 7.5%);
     cursor: pointer;
+    text-decoration: none;
   }
 }
 
