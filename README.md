@@ -1,18 +1,13 @@
-# shop
+# Vue.js Fast Forms
+VueJS components for fast and easy forms build, validation and data bindning.
 
-> Appapp shops UI
+## Dependencies
+vue-fast-forms requires [Bootstrap 4 CSS](https://v4-alpha.getbootstrap.com/) for forms styling and [moment.js](https://momentjs.com/) for a datepicker.
 
-## Build Setup
-
-``` bash
-# install dependencies
-npm install
-
-# serve with hot reload at localhost:8080
-npm run dev
-
-# build for production with minification
-npm run build
+## Installation
+```bash
+$ npm install vue-fast-forms bootstrap@4.0.0-alpha.6 moment
 ```
 
-For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+## Docs and examples
+See the [documentation](http://vue-fast-forms.hovesyan.pro/).
