@@ -28,7 +28,7 @@ export default {
   data() {
     return {
       inputs: {},
-      data: this.value,
+      data: this.value || {},
     };
   },
   created() {
