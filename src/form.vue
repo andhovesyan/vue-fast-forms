@@ -1,5 +1,9 @@
 <template>
-  <form :method="method" :action="action" :target="target" @reset="onReset" @submit.prevent="$emit('submit', data)" role="form">
+  <form :method="method" :action="action" :target="target"
+    @reset="onReset"
+    @submit.prevent="$emit('submit', data)"
+    role="form"
+  >
     <slot></slot>
   </form>
 </template>
