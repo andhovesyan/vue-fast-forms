@@ -23,7 +23,7 @@ export default {
       type: Boolean,
       default: false,
     },
-    value: null,
+    value: {},
   },
   data() {
     return {
