@@ -10,7 +10,8 @@
     @dbClick="onDbClick"
     @focus="onFocus"
   >
-    <slot></slot>
+    <component :is="loaderComponent" v-if="loading"/>
+    <slot v-else></slot>
   </component>
 </template>
 
@@ -51,6 +52,14 @@ export default {
       type: Boolean,
       default: false,
     },
+    loader: {
+      type: [String, Object],
+      default: 'loading...',
+    },
+    loading: {
+      type: Boolean,
+      default: false,
+    },
 
     href: {
       type: String,
@@ -60,7 +69,7 @@ export default {
 
   computed: {
     classes() {
-      let classes = ['btn'];
+      const classes = ['btn'];
       if (this.block) {
         classes.push('btn-block');
       }
@@ -71,15 +80,23 @@ export default {
         classes.push('active');
       }
       if (this.vfSize) {
-        classes.push('btn-' + this.vfSize);
+        classes.push(`btn- ${this.vfSize}`);
       }
       if (this.vfColor) {
-        classes.push('btn-' + (this.outline ? 'outline-' : '') + this.vfColor);
+        classes.push(`btn-${(this.outline ? 'outline-' : '') + this.vfColor}`);
       }
       if (this.text) {
-        classes.push('text-' + this.text);
+        classes.push(`text-${this.text}`);
       }
       return classes;
+    },
+    loaderComponent() {
+      if (typeof this.loader === 'object') {
+        return this.loader;
+      }
+      return {
+        render: (createElement) => createElement('span', this.loader),
+      };
     },
     isFormValid() {
       if (!this.form) {
@@ -109,7 +126,7 @@ export default {
       } else if (this.tag === 'a') {
         return this.href;
       }
-      return "javascript:;";
+      return '#';
     },
   },
   methods: {
