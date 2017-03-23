@@ -4,5 +4,5 @@
     ["es2017"],
     ["stage-0"]
   ],
-  "plugins": ["lodash"],
+  "plugins": ["lodash"]
 }
