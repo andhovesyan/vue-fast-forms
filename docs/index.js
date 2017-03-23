@@ -54,6 +54,6 @@ const router = new VueRouter({
 new Vue({
   strict: process.env.NODE_ENV !== 'production',
   router,
-  render: h => h(App),
+  render: (h) => h(App),
   el: '#app',
 });

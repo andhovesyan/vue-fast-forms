@@ -68,5 +68,10 @@ export default {
       this.$emit('change', e.target.value, e);
     },
   },
+  watch: {
+    value(to) {
+      this.realVal = to;
+    },
+  },
 };
 </script>

@@ -68,10 +68,15 @@ export default {
     setValue(value) {
       this.realVal = value;
     },
-    onChange: function (e) {
+    onChange: (e) => {
       this.realVal = e.target.value;
       this.$emit('input', e.target.value, e);
       this.$emit('change', e.target.value, e);
+    },
+  },
+  watch: {
+    value(to) {
+      this.realVal = to;
     },
   },
 };

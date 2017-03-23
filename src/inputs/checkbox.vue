@@ -45,7 +45,7 @@ export default {
         return this.realVal === this.valueChecked;
       }
       return this.realVal;
-    }
+    },
   },
 
   methods: {
@@ -72,6 +72,11 @@ export default {
       } else {
         this.realVal.splice(index, 1);
       }
+    },
+  },
+  watch: {
+    value(to) {
+      this.realVal = to;
     },
   },
 };
