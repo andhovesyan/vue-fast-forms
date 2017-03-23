@@ -50,7 +50,7 @@ export default {
         if (typeof option !== 'object') {
           const value = option;
           newOption = {};
-          newOption[this.optionValue] = value.toLowerCase().split(' ').join('_');
+          newOption[this.optionValue] = value; // .toLowerCase().split(' ').join('_');
           newOption[this.optionName] = value;
         }
         return newOption;

@@ -9,7 +9,7 @@
         :class="{readonly: readonly}"
         :name="name"
         @focus="showCalendar"
-        :value="formattedValue"
+        :value="currTime.format(this.format)"
         :placeholder="placeholder"
         :required="required"
         readonly
@@ -17,19 +17,75 @@
       <slot name="after" v-if="!inline"></slot>
     </div>
 
-    <div class="calendar" v-show="isOpen || debug" :class="className" :style="calendarStyle">
-      <header>
-        <span class="prev" @click="toPrev">&lt;</span>
-        <span class="up" @click="up">{{header}}</span>
-        <span class="next" @click="toNext">&gt;</span>
-      </header>
-      <component :is="currViewComp"
-        :curr-date="currDate"
-        :selected-date="selectedDate"
-        @select-day="selectDate"
-        @select-month="selectMonth"
-        @select-year="selectYear"
-      />
+    <div class="calendar" v-show="isOpen && view === 'main'" :class="className" :style="calendarStyle">
+      <div class="row align-items-center text-center">
+        <div class="col">
+          <button class="btn-arrow" @click="hours++">
+            <i class="fa fa-chevron-up"></i>
+          </button>
+        </div>
+        <div class="col col-auto align-self-center">
+          &nbsp;
+        </div>
+        <div class="col">
+          <button class="btn-arrow" @click="minutes++">
+            <i class="fa fa-chevron-up"></i>
+          </button>
+        </div>
+        <div class="col col-auto">
+          <div class="part" style="width: 2.5rem">
+            &nbsp;&nbsp;
+          </div>
+        </div>
+        <div class="w-100"></div>
+        <div class="col">
+          <div class="cell" @click="view = 'hours'">
+            {{currTime.format('hh')}}
+          </div>
+        </div>
+        <div class="col col-auto">
+          :
+        </div>
+        <div class="col">
+          <div class="cell" @click="view = 'hours'">
+            {{currTime.format('mm')}}
+          </div>
+        </div>
+        <div class="col col-auto">
+          <div class="part" style="width: 2.5rem">
+            {{currTime.format('A')}}
+          </div>
+        </div>
+        <div class="w-100"></div>
+        <div class="col">
+          <button class="btn-arrow" @click="hours--">
+            <i class="fa fa-chevron-down"></i>
+          </button>
+        </div>
+        <div class="col col-auto align-self-center">
+          &nbsp;
+        </div>
+        <div class="col">
+          <button class="btn-arrow" @click="minutes--">
+            <i class="fa fa-chevron-down"></i>
+          </button>
+        </div>
+        <div class="col col-auto">
+          <div class="part" style="width: 2.5rem">
+            &nbsp;&nbsp;
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="calendar p-2" v-show="view === 'hours'">
+      <div class="row no-gutters">
+        <div class="col-3 text-center" v-for="n in 12">
+          <button class="cell hour" @click="hours = Number(n); view = 'main'">
+            {{(n < 10) ? '0' + n : n}}
+          </button>
+        </div>
+      </div>
     </div>
 
   </div>
@@ -38,16 +94,7 @@
 <script>
 import moment from 'moment';
 
-import daysView from './days';
-import monthsView from './months';
-import yearsView from './years';
-
 export default {
-  components: {
-    daysView,
-    monthsView,
-    yearsView,
-  },
   props: {
     id: {
       type: String,
@@ -58,7 +105,7 @@ export default {
     },
     format: {
       type: String,
-      default: 'MM/DD/YYYY',
+      default: 'hh:mm A',
     },
     disabled: {
       type: Object,
@@ -85,25 +132,28 @@ export default {
     },
     debug: {
       type: Boolean,
-      default: false,
-    },
-    returnObject: {
-      type: Boolean,
-      default: false,
+      default: true,
     },
   },
   data() {
     return {
-      currDate: moment(),
       selectedDate: moment(this.value, this.format),
-      currView: null,
+      view: null,
       weekdays: moment.weekdaysShort(true),
       formattedValue: null,
       calendarHeight: 0,
       form: null,
+      hours: 0,
+      minutes: 0,
     };
   },
   computed: {
+    currTime() {
+      return moment(`${this.hours}:${this.minutes}`, 'H:m');
+    },
+    selectedTime() {
+      return moment(`${this.hours}:${this.minutes}`, 'H:m').format(this.format);
+    },
     className() {
       const classes = [`align-${this.align}`];
       if (this.inline) {
@@ -112,7 +162,7 @@ export default {
       return classes;
     },
     calendarStyle() {
-      if (this.currView !== 'day') {
+      if (this.view !== 'day') {
         return {};
       }
       const elSize = this.$el ? this.$el.getBoundingClientRect() : 0;
@@ -126,94 +176,37 @@ export default {
       return styles;
     },
     isOpen() {
-      return !!this.currView;
+      return !!this.view;
     },
-    currViewComp() {
-      const view = this.currView || 'day';
+    viewComp() {
+      const view = this.view || 'day';
       return `${view}sView`;
     },
     header() {
       let header;
-      if (this.currView === 'day') {
+      if (this.view === 'day') {
         header = this.currDate.format('MMM YYYY');
-      } else if (this.currView === 'month') {
+      } else if (this.view === 'month') {
         header = this.currDate.format('YYYY');
-      } else if (this.currView === 'year') {
+      } else if (this.view === 'year') {
         header = this.currDate.format('YYYY').replace(/.$/, "0's");
       }
       return header;
     },
     emitValue() {
-      if (this.returnObject) {
-        return this.selectedDate;
-      }
       const value = this.selectedDate.format(this.format);
       return value;
     },
   },
   methods: {
     close() {
-      this.currView = null;
+      this.view = null;
     },
     showCalendar() {
       if (this.inline || this.readonly) {
         return false;
       }
-      return (this.isOpen) ? this.close() : this.showDayCalendar();
-    },
-    toPrev() {
-      if (this.currView === 'day') {
-        this.currDate = moment(this.currDate.subtract(1, 'month'));
-      } else if (this.currView === 'month') {
-        this.currDate = moment(this.currDate.subtract(1, 'year'));
-      } else if (this.currView === 'year') {
-        this.currDate = moment(this.currDate.subtract(10, 'year'));
-      }
-    },
-    toNext() {
-      if (this.currView === 'day') {
-        this.currDate = moment(this.currDate.add(1, 'month'));
-      } else if (this.currView === 'month') {
-        this.currDate = moment(this.currDate.add(1, 'year'));
-      } else if (this.currView === 'year') {
-        this.currDate = moment(this.currDate.add(10, 'year'));
-      }
-    },
-    up() {
-      if (this.currView === 'day') {
-        this.currView = 'month';
-      } else if (this.currView === 'month') {
-        this.currView = 'year';
-      }
-    },
-    showDayCalendar() {
-      this.currView = 'day';
-      this.$emit('opened');
-    },
-    selectDate(day) {
-      if (day.isDisabled) {
-        return false;
-      }
-      this.selectedDate = moment(day);
-      this.$emit('selected', this.emitValue);
-      this.$emit('input', this.emitValue);
-      return (this.inline) ? this.showDayCalendar() : this.close();
-    },
-    selectMonth(month) {
-      if (month.isDisabled) {
-        return false;
-      }
-      this.currDate = month;
-      this.showDayCalendar();
-      return true;
-    },
-    selectYear(year) {
-      if (year.isDisabled) {
-        return false;
-      }
-      this.currDate = year;
-      this.currView = 'month';
-      return true;
+      return (this.isOpen) ? this.close() : (this.view = 'main');
     },
     setValue(value) {
       if (!value) {
@@ -256,15 +249,32 @@ export default {
     });
   },
   watch: {
-    selectedDate(date) {
-      this.currDate = moment(date);
-      this.formattedValue = date.format(this.format);
+    hours(to) {
+      if (to === 24 && this.minutes !== 0) {
+        this.hours = 0;
+      }
+      if (to === -1) {
+        this.hours = 23;
+      }
+    },
+    minutes(to) {
+      if (this.hours === 24 && to === 1) {
+        this.hours = 0;
+      }
+      if (to === 60) {
+        this.hours++;
+        this.minutes = 0;
+      }
+      if (to === -1) {
+        this.hours--;
+        this.minutes = 59;
+      }
     },
   },
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 $cell-width: 100% / 7;
 
 .datepicker {
@@ -272,7 +282,7 @@ $cell-width: 100% / 7;
 }
 
 .calendar {
-  padding: 0 .5rem .5rem;
+  padding: 0 1rem;
   position: absolute;
   z-index: 100;
   background: #fff;
@@ -355,16 +365,21 @@ $cell-width: 100% / 7;
   }
 
   .cell {
-    float: left;
-    display: inline-block;
-    padding: 0 5px;
-    width: calc(14.28% - .25rem);
-    margin: .125rem;
+    font-size: 1.25rem;
+    padding: 0;
+    width: 100%;
+    margin: 0;
     height: 2.35rem;
     line-height: 2.3rem;
     text-align: center;
-    vertical-align: middle;
-    border: 1px solid transparent;
+
+    &.hour {
+      background: transparent;
+      font-size: 1rem;
+      height: 3rem;
+      width: calc(100% - 1rem);
+      margin: .5rem;
+    }
 
     &:not(.blank):not(.disabled) {
       &.day,
@@ -386,6 +401,20 @@ $cell-width: 100% / 7;
   .month,
   .year {
     width: calc(33.333% - .25rem);
+  }
+}
+.btn-arrow {
+  background: transparent;
+  border-radius: .15rem;
+  border: none;
+  color: #337AB7;
+  height: 2.25rem;
+  line-height: 2.25rem;
+  margin: .5rem 0;
+  text-align: center;
+  width: 100%;
+  &:hover {
+    background: #f0f0f0;
   }
 }
 </style>

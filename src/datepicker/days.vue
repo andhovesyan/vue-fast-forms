@@ -23,7 +23,7 @@ export default {
     selectedDate: null,
   },
 
-  data () {
+  data() {
     return {
       weekdays: moment.weekdaysShort(true),
     };

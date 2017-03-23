@@ -1,3 +1,4 @@
+import Home from './pages/Home';
 import Buttons from './pages/Buttons';
 import Forms from './pages/Forms';
 import Inputs from './pages/Inputs';
@@ -5,6 +6,10 @@ import Custom from './pages/Custom';
 import Datepicker from './pages/Datepicker';
 
 export default [{
+  name: 'home',
+  path: '/',
+  component: Home,
+}, {
   name: 'forms',
   path: '/forms',
   component: Forms,

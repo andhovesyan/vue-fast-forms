@@ -4,9 +4,9 @@ $font-family-sans-serif: "Source Sans Pro", -apple-system, system-ui, BlinkMacSy
 $fa-font-path: "../node_modules/font-awesome/fonts";
 
 @import "./prism.scss";
-@import "node_modules/font-awesome/scss/font-awesome";
-@import "node_modules/bootstrap/scss/bootstrap";
-@import "node_modules/tether/dist/css/tether";
+@import "~font-awesome/scss/font-awesome";
+@import "~bootstrap/scss/bootstrap";
+@import "~tether/dist/css/tether";
 
 @font-face {
   font-family: "M+ 2m";
@@ -316,7 +316,6 @@ $cell-width: 100% / 7;
   position: absolute;
   z-index: 100;
   background: #fff;
-  width: 320px;
   border: 1px solid #ccc;
   &.align-right {
     right: 0;

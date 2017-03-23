@@ -2,12 +2,47 @@
 <div id="wrap">
   <nav id="topbar" class="navbar navbar-full fixed-top navbar-light bg-faded">
     <div class="container">
-      <a class="navbar-brand" href="#">Vue.js Fast Forms</a>
-      <a id="githubBtn" class="float-right" target="_blank" href="https://github.com/Hovesyan/vue-fast-forms">
-        <vf-icon icon="star" /> Github
-      </a>
+      <div class="row">
+        <div class="col">
+          <router-link class="navbar-brand" :to="{name: 'home'}">
+            Vue.js - Fast Forms
+          </router-link>
+        </div>
+        <div class="col">
+          <a id="githubBtn"
+             class="float-right"
+             target="_blank"
+             href="https://github.com/Hovesyan/vue-fast-forms"
+          >
+            <vf-icon icon="star" /> Github
+          </a>
+        </div>
+      </div>
     </div>
   </nav>
+  <header id="header" class="jumbotron jumbotron-fluid text-center">
+    <h1 style="font-weight: 600; font-size: 4rem">Vue Fast Forms</h1>
+    <p class="lead mt-3" style="font-weight: 600">
+      Vue.js components for fast and easy forms build, validation and data bindning.
+    </p>
+    <div class="container">
+      <div class="row">
+        <div class="col-auto mx-auto text-center">
+          <h5 class="my-2">Install via npm</h5>
+          <code class="install-code">npm install vue-fast-form --save-dev</code>
+<!--           <h5 class="my-2">via yarn</h5>
+          <code class="install-code">yarn add vue-fast-form --dev</code> -->
+          <h5 class="my-2">or download</h5>
+          <vf-btn class="mt-1">
+            vue-fast-form.js
+          </vf-btn>
+          <vf-btn class="mt-1">
+            vue-fast-form.min.js
+          </vf-btn>
+        </div>
+      </div>
+    </div>
+  </header>
   <div class="container pt-4">
     <div class="row">
       <div class="col">
@@ -59,15 +94,17 @@ export default {
 
   name: 'App',
 
-  created() {
+  mounted() {
     const $window = $(window);
+    const $sideNav = $('#sideNav');
+    const offset = $sideNav.offset().top - 64;
     $window.on('scroll', () => {
-      if ($window.scrollTop() > 60) {
+      if ($window.scrollTop() >= offset) {
         $('#sideNav').addClass('scrolled');
-        $('#topbar').addClass('scrolled');
+        // $('#topbar').addClass('scrolled');
       } else {
         $('#sideNav').removeClass('scrolled');
-        $('#topbar').removeClass('scrolled');
+        // $('#topbar').removeClass('scrolled');
       }
     });
   },
@@ -107,23 +144,24 @@ export default {
 }
 
 #topbar {
-  background: #2196f3;
-  color: #fff;
+  background: #fff;
+  color: #2C3E50;
   border: none;
-  border-bottom: 1px solid #888;
+  // border-bottom: 1px solid #888;
+  box-shadow: 0 0 1px rgba(0,0,0,0.25);
   border-radius: 0;
   line-height: 4rem;
-  height: 4.5rem;
+  height: 4rem;
   padding: 0;
+  width: 100%;
   transition: line-height .3s, height .3s;
   .navbar-brand {
-    color: #fff;
+    color: #2C3E50;
     padding: 0;
     font-weight: 500;
     font-size: 1.5rem;
-    line-height: 4.5rem;
-    margin-top: -2px;
-    height: 4.5rem;
+    line-height: 4rem;
+    height: 4rem;
     transition: font-size .3s, line-height .3s, height .3s;
   }
   &.scrolled {
@@ -146,13 +184,13 @@ export default {
 
 #sideNav {
   width: 15rem;
-  position: fixed;
   h6 {
     margin: .5rem 0;
   }
   padding-left: 2rem;
   &.scrolled {
-    top: 4.25rem;
+    position: fixed;
+    top: 5rem;
   }
   .nav-item {
     line-height: 2rem;
@@ -178,5 +216,23 @@ export default {
       }
     }
   }
+}
+
+#header {
+  background: lighten(#2196F3, 5%);
+  color: #fff;
+}
+.install-code {
+  border: solid 1px #2196F3;
+  border-radius: .15rem;
+  display: block;
+  line-height: 2.2rem;
+  height: 2.3rem;
+  padding: 0 1rem;
+}
+
+.lead {
+  font-size: 1.5rem;
+  font-weight: 400;
 }
 </style>

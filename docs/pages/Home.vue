@@ -1,6 +1,6 @@
 <template>
 <div>
-  <h1 class="mb-5">VueJS Fast Forms</h1>
+  <h1 class="mb-5">Full example</h1>
   <doc-section title="Forms">
     <code-block>
       <div slot="result">
@@ -52,7 +52,7 @@
             </vf-group>
             <vf-group label="Product type:">
               <vf-select
-                name="product.name.test"
+                name="product"
                 placeholder="Select product"
                 :options="['Product 1', 'Product 2', 'Product 3']"
                 block

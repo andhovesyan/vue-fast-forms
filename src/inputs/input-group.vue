@@ -1,5 +1,5 @@
 <template>
-<component :is="parent" :class="{'input-group': isGroup}">
+<div class="input-group">
   <slot name="before"></slot>
   <input
     :id="id"
@@ -13,7 +13,6 @@
     :autofocus="autofocus"
     :required="required"
     :readonly="readonly"
-    :disabled="disabled"
     @input="onInput"
     @change="onChange"
     @focus="onFocus"
@@ -24,7 +23,7 @@
     ref="input"
   />
   <slot name="after"></slot>
-</component>
+</div>
 </template>
 
 <script>
@@ -77,6 +76,7 @@ export default {
     };
   },
   mounted() {
+    console.log(this.$slots);
     this.setForm();
     if (this.$refs.input) {
       this.isValid = this.$refs.input.validity.valid;
@@ -86,12 +86,6 @@ export default {
     }
   },
   computed: {
-    isGroup() {
-      return this.$slots.before || this.$slots.after;
-    },
-    parent() {
-      return (this.isGroup) ? 'div' : 'span';
-    },
     currState() {
       if (!this.touched) {
         return this.state;
@@ -104,10 +98,10 @@ export default {
     inputClass() {
       const classes = [];
       if (this.size) {
-        classes.push(`form-control-${this.size}`);
+        classes.push('form-control-' + this.size);
       }
       if (this.currState) {
-        classes.push(`form-control-${this.currState}`);
+        classes.push('form-control-' + this.currState);
       }
       if (this.block) {
         classes.push('form-text');
@@ -156,9 +150,6 @@ export default {
       if (this.form) {
         this.form.$emit('changed', this);
       }
-    },
-    value(to) {
-      this.realVal = to;
     },
   },
 };

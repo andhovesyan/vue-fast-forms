@@ -6,6 +6,7 @@
       <div slot="result">
         <vf-group>
           <label for="textField">Text field:</label>
+          {{text}}
           <vf-input
             id="textField"
             v-model="text"

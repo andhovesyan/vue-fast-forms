@@ -20,9 +20,13 @@ export default {
       type: Boolean,
       default: false,
     },
+    disabled: {
+      type: Boolean,
+      default: false,
+    },
   },
 
-  data () {
+  data() {
     return {
       form: null,
       realVal: this.value,
@@ -43,7 +47,7 @@ export default {
       this.form = form;
     },
     onInput(event) {
-      this.$emit('input', value, event);
+      this.$emit('input', event.target.value, event);
     },
     onChange(event) {
       this.$emit('change', event.target.value, event);

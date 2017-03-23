@@ -12,6 +12,7 @@ import {
   vfDatepicker,
   vfAddon,
   vfHelp,
+  vfTimepicker,
 } from 'vue-fast-forms';
 
 import {
@@ -31,6 +32,7 @@ Vue.component('vf-group', vfGroup);
 Vue.component('vf-input', vfInput);
 Vue.component('vf-radio', vfRadio);
 Vue.component('vf-datepicker', vfDatepicker);
+Vue.component('vf-timepicker', vfTimepicker);
 Vue.component('vf-select', vfSelect);
 Vue.component('vf-addon', vfAddon);
 Vue.component('vf-help', vfHelp);

@@ -29,19 +29,22 @@ export default {
   },
   created() {
     this.$on('input_added', (input) => {
-      if (this.inputs[input.name]) {
-        return;
-      }
-      const data = {};
-      data[input.name] = input;
+      // if (this.getInput(input.name)) {
+      //   return;
+      // }
+
+      // const data = {};
+      // data[input.name] = input;
+      const data = this.parseInput(input);
       this.inputs = Object.assign({}, this.inputs, data);
-      input.setValue(this.data[input.name]);
-      this.inputs[input.name].$on('input', (value) => {
-        const inputData = {};
-        inputData[input.name] = value;
+      input.setValue(this.getData(input.name));
+
+      input.$on('input', (value) => {
+        const inputData = this.parseData(input, value);
         this.data = Object.assign({}, this.data, inputData);
       });
     });
+
     this.$on('changed', (input) => {
       if (!this.inputs[input.name]) {
         return;
@@ -50,6 +53,7 @@ export default {
       data[input.name] = input;
       this.inputs = Object.assign({}, this.inputs, data);
     });
+
     this.$on('input_removed', (input) => {
       if (!this.inputs[input.name]) {
         return;
@@ -87,6 +91,53 @@ export default {
         }
       }
       this.$emit('reset', event);
+    },
+    parseInput(input) {
+      const names = input.name.split('.').reverse();
+      let data = null;
+      names.forEach((name) => {
+        const temp = JSON.parse(JSON.stringify(data));
+        data = {};
+        data[name] = temp;
+      });
+      let res = data;
+      names.forEach((n, ind) => {
+        if ((ind + 1) === names.length) {
+          data[n] = input;
+        } else {
+          res = res[n];
+        }
+      });
+      return data;
+    },
+    parseData(input, value) {
+      const names = input.name.split('.').reverse();
+      let data = value;
+      names.forEach((name) => {
+        const temp = JSON.parse(JSON.stringify(data));
+        data = {};
+        data[name] = temp;
+      });
+      return data;
+    },
+    getInput(name) {
+      const names = name.split('.');
+      let res = this.inputs;
+      names.forEach((n) => {
+        console.log(n, res, this.inputs);
+        res = res[n];
+      });
+      return res;
+    },
+    getData(name) {
+      console.log(name);
+      const names = name.split('.');
+      let res = this.data;
+      console.log(res);
+      names.forEach((n) => {
+        res = res[n];
+      });
+      return res;
     },
   },
   watch: {

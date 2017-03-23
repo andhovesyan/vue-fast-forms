@@ -12,6 +12,7 @@ export vfHelp from './inputs/input-help';
 export vfAddon from './inputs/input-addon';
 
 export vfDatepicker from './datepicker/datepicker';
+export vfTimepicker from './timepicker/timepicker';
 
 // const VueFastForms = {
 //   vfButton,

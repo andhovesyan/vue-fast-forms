@@ -5,6 +5,16 @@
     <code-block>
       <div slot="result">
         <vf-group>
+          <label for="defaultDatepicker">Timepicker:</label>
+          <vf-timepicker
+            id="defaultDatepicker"
+            v-model="defaultDate"
+            placeholder="date"
+            name="date"
+          >
+          </vf-timepicker>
+        </vf-group>
+        <vf-group>
           <label for="defaultDatepicker">Datepicker:</label>
           <vf-datepicker
             id="defaultDatepicker"
@@ -78,7 +88,7 @@ export default {
       <div slot="result">
         <p>Date selected: {{inlineDate.format('MM/DD/YYYY')}}</p>
         <vf-group>
-          <vf-datepicker v-model="inlineDate" name="date" inline />
+          <vf-datepicker v-model="inlineDate" name="date" inline return-object />
         </vf-group>
       </div>
 <div slot="code">&lt;template&gt;
