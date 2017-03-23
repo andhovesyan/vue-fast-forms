@@ -134,6 +134,10 @@ export default {
       this.isValid = this.$refs.input.validity.valid;
       this.$emit('input', value, event);
     },
+    onChange(event) {
+      this.onInput(event);
+      this.$emit('change', event.target.value, event);
+    },
     onFocus(event) {
       if (this.readonly) {
         event.target.select();

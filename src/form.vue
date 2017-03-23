@@ -1,5 +1,9 @@
 <template>
-  <form :method="method" :action="action" :target="target" @reset="onReset" @submit.prevent="$emit('submit', data)" role="form">
+  <form :method="method" :action="action" :target="target"
+    @reset="onReset"
+    @submit.prevent="$emit('submit', data)"
+    role="form"
+  >
     <slot></slot>
   </form>
 </template>
@@ -19,12 +23,12 @@ export default {
       type: Boolean,
       default: false,
     },
-    value: null,
+    value: {},
   },
   data() {
     return {
       inputs: {},
-      data: this.value,
+      data: this.value || {},
     };
   },
   created() {
