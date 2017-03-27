@@ -146,14 +146,13 @@ export default {
       if (this.readonly) {
         return;
       }
+      let value = event.target.value;
       if (this.autosuggest) {
         this.autosuggest(value).then((suggests) => {
           this.showSuggests = true;
           this.suggests = suggests;
         });
       }
-      this.showSuggests = true;
-      let value = event.target.value;
       if (this.type === 'number') {
         value = Number(value);
       }
