@@ -147,7 +147,7 @@ export default {
         return;
       }
       if (this.autosuggest) {
-        this.autosuggest().then((suggests) => {
+        this.autosuggest(value).then((suggests) => {
           this.showSuggests = true;
           this.suggests = suggests;
         });
