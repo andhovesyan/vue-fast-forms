@@ -5,14 +5,18 @@
     <code-block>
       <div slot="result">
         <vf-group>
-          <vf-select v-model="select" :options="['One', 'Two', 'Three']" name="select" />
+          <vf-select
+            v-model="select"
+            :options="['One', 'Two', 'Three']"
+            name="select"
+          />
         </vf-group>
         Selected: {{select}}
       </div>
-<div slot="code">&lt;vf-group&gt;
+<pre slot="code">&lt;vf-group&gt;
   &lt;vf-select v-model="select" :options="['One', 'Two', 'Three']" /&gt;
 &lt;/vf-group&gt;
-Selected: {{'&#123;&#123;'}}select}}</div>
+Selected: {{'&#123;&#123;'}}select}}</pre>
     </code-block>
   </doc-section>
   <doc-section title="Checkboxes">
@@ -21,14 +25,21 @@ Selected: {{'&#123;&#123;'}}select}}</div>
         <vf-group>
           <label>Boolean <code>v-model</code>:</label>
           <div class="clearfix"></div>
-          <vf-checkbox name="boolean_checkbox"  v-model="isCheckedBool">Checked</vf-checkbox>
+          <vf-checkbox name="boolean_checkbox"  v-model="isCheckedBool">
+            Checked
+          </vf-checkbox>
         </vf-group>
           Checked: {{isCheckedBool}}
         <hr>
         <vf-group>
           <label>String <code>v-model</code>:</label>
           <div class="clearfix"></div>
-          <vf-checkbox name="string_checkbox" v-model="isCheckedString" value-checked="YES" value-unchecked="NO">
+          <vf-checkbox
+            name="string_checkbox"
+            v-model="isCheckedString"
+            value-checked="YES"
+            value-unchecked="NO"
+          >
             Checked
           </vf-checkbox>
         </vf-group>
@@ -37,13 +48,20 @@ Selected: {{'&#123;&#123;'}}select}}</div>
         <vf-group>
           <label>Array <code>v-model</code>:</label>
           <div class="clearfix"></div>
-          <vf-checkbox name="ar_checkbox" v-model="arChecked" :vf-value="1">One</vf-checkbox>
-          <vf-checkbox name="ar_checkbox" v-model="arChecked" :vf-value="2">Two</vf-checkbox>
-          <vf-checkbox name="ar_checkbox" v-model="arChecked" :vf-value="3">Three</vf-checkbox>
+          <vf-checkbox name="ar_checkbox" v-model="arChecked" :vf-value="1">
+            One
+          </vf-checkbox>
+          <vf-checkbox name="ar_checkbox" v-model="arChecked" :vf-value="2">
+            Two
+          </vf-checkbox>
+          <vf-checkbox name="ar_checkbox" v-model="arChecked" :vf-value="3">
+            Three
+          </vf-checkbox>
         </vf-group>
+        <input type="checkbox" @change="arChecked = [1,2,3]" name="">
         Checked values: {{arChecked}}
       </div>
-<div slot="code">&lt;vf-group&gt;
+<pre slot="code">&lt;vf-group&gt;
   &lt;label&gt;Boolean &lt;code&gt;v-model&lt;/code&gt;:&lt;/label&gt;
   &lt;div class="clearfix"&gt;&lt;/div&gt;
   &lt;vf-checkbox v-model="isCheckedBool"&gt;Checked&lt;/vf-checkbox&gt;
@@ -66,23 +84,32 @@ Checked: {{'&#123;&#123;'}}isCheckedString}}
   &lt;vf-checkbox v-model="arChecked" :vf-value="2"&gt;Two&lt;/vf-checkbox&gt;
   &lt;vf-checkbox v-model="arChecked" :vf-value="3"&gt;Three&lt;/vf-checkbox&gt;
 &lt;/vf-group&gt;
-Checked values: {{'&#123;&#123;'}}arChecked}}</div>
+Checked values: {{'&#123;&#123;'}}arChecked}}</pre>
     </code-block>
   </doc-section>
   <doc-section title="Radios">
     <code-block>
       <div slot="result">
         <vf-group>
-          <vf-radio name="radio_horizontal" v-model="radioHorizontal" :values="['One', 'Two', 'Three']" />
+          <vf-radio
+            name="radio_horizontal"
+            v-model="radioHorizontal"
+            :values="['One', 'Two', 'Three']"
+          />
         </vf-group>
         Selected: {{radioHorizontal}}
         <hr>
         <vf-group>
-          <vf-radio name="radio_vertical" v-model="radioVertical" :values="['One', 'Two', 'Three']" vertical />
+          <vf-radio
+            name="radio_vertical"
+            v-model="radioVertical"
+            :values="['One', 'Two', 'Three']"
+            vertical
+          />
         </vf-group>
         Selected: {{radioVertical}}
       </div>
-<div slot="code">&lt;vf-group&gt;
+<pre slot="code">&lt;vf-group&gt;
   &lt;vf-radio v-model="radioHorizontal" :values="['One', 'Two', 'Three']" /&gt;
 &lt;/vf-group&gt;
 Selected: {{'&#123;&#123;'}}radioHorizontal}}
@@ -90,7 +117,7 @@ Selected: {{'&#123;&#123;'}}radioHorizontal}}
 &lt;vf-group&gt;
   &lt;vf-radio v-model="radioVertical" :values="['One', 'Two', 'Three']" vertical /&gt;
 &lt;/vf-group&gt;
-Selected: {{'&#123;&#123;'}}radioVertical}}</div>
+Selected: {{'&#123;&#123;'}}radioVertical}}</pre>
     </code-block>
   </doc-section>
 </div>

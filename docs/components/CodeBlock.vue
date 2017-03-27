@@ -4,7 +4,11 @@
       <slot name="result">Result</slot>
     </div>
     <div class="code-block">
-    <pre :class="'language-' + lang"><code ref="code" :class="'language-' + lang"><slot name="code">Code</code></pre>
+      <pre :class="'language-' + lang">
+        <code ref="code" :class="'language-' + lang">
+            <slot name="code">Code</slot>
+        </code>
+      </pre>
     </div>
   </div>
 </template>

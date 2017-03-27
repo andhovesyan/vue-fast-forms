@@ -1,6 +1,10 @@
 <template>
 <span>
-  <label class="custom-control custom-radio" :class="{block: vertical}" v-for="val in formattedValues">
+  <label
+    v-for="val in formattedValues"
+    class="custom-control custom-radio"
+    :class="{block: vertical}"
+  >
     <input
       class="custom-control-input"
       type="radio"

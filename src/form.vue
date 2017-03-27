@@ -1,7 +1,10 @@
 <template>
-  <form :method="method" :action="action" :target="target"
+  <form
+    :method="method"
+    :action="action"
+    :target="target"
     @reset="onReset"
-    @submit.prevent="$emit('submit', data)"
+    @submit="onSubmit"
     role="form"
   >
     <slot></slot>
@@ -73,15 +76,16 @@ export default {
           arInputs.push(this.inputs[ind]);
         }
       }
-      return arInputs.filter(input => input.state === 'danger');
+      return arInputs.filter((input) => input.state === 'danger');
     },
     isValid() {
       return !this.errors.length;
     },
   },
   methods: {
-    onSubmit() {
-
+    onSubmit(e) {
+      e.preventDefault();
+      this.$emit('submit', this.data, e);
     },
     onReset(event) {
       for (const ind in this.inputs) {

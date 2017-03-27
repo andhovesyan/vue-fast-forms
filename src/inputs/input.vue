@@ -1,5 +1,5 @@
 <template>
-<component :is="parent" :class="{'input-group': isGroup}">
+<component :is="parent" :class="{'input-group': isGroup, 'input-autocomplete': shouldAutocomplete}">
   <slot name="before"></slot>
   <input
     :id="id"
@@ -11,6 +11,7 @@
     :placeholder="placeholder"
     :pattern="pattern"
     :autofocus="autofocus"
+    :autocomplete="shouldAutocomplete"
     :required="required"
     :readonly="readonly"
     :disabled="disabled"
@@ -23,6 +24,11 @@
     @reset="onReset"
     ref="input"
   />
+  <ul class="input-autosuggest" :style="suggestsStyle" v-if="showSuggests">
+    <li v-for="suggest in suggests" @click="_onSuggestSelect(suggest)">
+      {{suggest}}
+    </li>
+  </ul>
   <slot name="after"></slot>
 </component>
 </template>
@@ -65,8 +71,14 @@ export default {
       default: false,
     },
     autocomplete: {
+      type: Boolean,
+      default: true,
+    },
+    autosuggest: {
       type: Function,
-      default: () => [],
+    },
+    onSuggestSelect: {
+      type: Function,
     },
   },
   data() {
@@ -74,6 +86,9 @@ export default {
       isValid: true,
       touched: (this.value) ? !!this.value.length : false,
       realVal: this.value,
+      suggestsStyle: {},
+      showSuggests: true,
+      suggests: [],
     };
   },
   mounted() {
@@ -84,6 +99,7 @@ export default {
     if (this.form) {
       this.form.$emit('input_added', this);
     }
+    this.suggestsStyle.height = this.$el.offsetHeight - 1;
   },
   computed: {
     isGroup() {
@@ -114,6 +130,12 @@ export default {
       }
       return classes;
     },
+    shouldAutocomplete() {
+      if (typeof this.autosuggest !== 'undefined') {
+        return false;
+      }
+      return this.autocomplete;
+    },
   },
   methods: {
     setValue(value) {
@@ -124,19 +146,38 @@ export default {
       if (this.readonly) {
         return;
       }
+      if (this.autosuggest) {
+        this.autosuggest().then((suggests) => {
+          this.showSuggests = true;
+          this.suggests = suggests;
+        });
+      }
+      this.showSuggests = true;
       let value = event.target.value;
       if (this.type === 'number') {
         value = Number(value);
       }
-      this.realVal = value;
+      this.setValue(value);
 
       this.touched = true;
-      this.isValid = this.$refs.input.validity.valid;
       this.$emit('input', value, event);
     },
     onChange(event) {
       this.onInput(event);
       this.$emit('change', event.target.value, event);
+    },
+    _onSuggestSelect(value) {
+      this.showSuggests = false;
+      if (this.onSuggestSelect) {
+        this.onSuggestSelect(value);
+      } else {
+        this.setValue(value);
+        this.$emit('input', value);
+      }
+      // if (Array.isArray(this.realVal)) {
+      //   this.realVal.push(value);
+      // } else {
+      // }
     },
     onFocus(event) {
       if (this.readonly) {
@@ -167,3 +208,27 @@ export default {
   },
 };
 </script>
+<style lang="scss">
+.input-autocomplete {
+  position: relative;
+}
+.input-autosuggest {
+  list-style: none;
+  padding: 0;
+  width: auto;
+  z-index: 100;
+  li {
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    border-top: 0;
+    line-height: 2.25rem;
+    padding: 0 1rem;
+    cursor: pointer;
+    min-width: 10rem;
+    width: auto;
+    &:hover {
+      background: #f5f5f5;
+    }
+  }
+}
+</style>

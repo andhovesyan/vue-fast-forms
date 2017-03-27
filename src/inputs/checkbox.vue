@@ -26,6 +26,9 @@ export default {
     valueChecked: null,
     valueUnchecked: null,
     vfValue: null,
+    checked: {
+      type: Boolean,
+    },
   },
 
   mounted() {
@@ -38,6 +41,9 @@ export default {
 
   computed: {
     isChecked() {
+      if (typeof this.checked !== 'undefined') {
+        return this.checked;
+      }
       if (Array.isArray(this.realVal)) {
         return this.realVal.indexOf(this.vfValue) !== -1;
       }
