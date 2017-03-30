@@ -10,6 +10,7 @@ const env = process.env.NODE_ENV;
 const cssSourceMapDev = (env === 'development' && config.dev.cssSourceMap);
 const cssSourceMapProd = (env === 'production' && config.build.productionSourceMap);
 const useCssSourceMap = cssSourceMapDev || cssSourceMapProd;
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 module.exports = {
   entry: {
@@ -82,4 +83,5 @@ module.exports = {
       },
     }],
   },
+  plugins: [new BundleAnalyzerPlugin()],
 };

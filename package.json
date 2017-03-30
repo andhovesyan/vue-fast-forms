@@ -68,6 +68,7 @@
     "vue-template-compiler": "^2.2.4",
     "vuex": "^2.2.1",
     "webpack": "2",
+    "webpack-bundle-analyzer": "^2.3.1",
     "webpack-dev-middleware": "^1.10.1",
     "webpack-dev-server": "2",
     "webpack-hot-middleware": "2",
