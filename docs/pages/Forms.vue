@@ -1,6 +1,7 @@
 <template>
 <div>
   <h1 class="mb-5">VueJS Fast Forms</h1>
+
   <doc-section title="Forms">
     <code-block>
       <div slot="result">

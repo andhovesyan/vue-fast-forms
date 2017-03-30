@@ -44,6 +44,7 @@ export default {
       this.inputs = Object.assign({}, this.inputs, data);
       input.setValue(this.data[input.name]);
       this.inputs[input.name].$on('input', (value) => {
+        console.log(value);
         const inputData = {};
         inputData[input.name] = value;
         this.data = Object.assign({}, this.data, inputData);
@@ -100,6 +101,9 @@ export default {
   watch: {
     data(data) {
       this.$emit('input', data);
+    },
+    value(value) {
+      this.data = value;
     },
   },
 };

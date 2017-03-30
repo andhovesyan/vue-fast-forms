@@ -201,8 +201,9 @@ export default {
         this.form.$emit('changed', this);
       }
     },
-    value(to) {
-      this.realVal = to;
+    value(value) {
+      this.realVal = value;
+      this.$emit('input', value);
     },
   },
 };
