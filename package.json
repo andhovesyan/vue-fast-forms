@@ -78,7 +78,7 @@
     "node": ">= 4.0.0",
     "npm": ">= 3.0.0"
   },
-  "version": "0.1.7",
+  "version": "0.1.8",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Hovesyan/vue-fast-forms.git"
