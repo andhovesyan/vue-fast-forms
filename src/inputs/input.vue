@@ -24,7 +24,7 @@
     @reset="onReset"
     ref="input"
   />
-  <ul class="input-autosuggest" :style="suggestsStyle" v-if="showSuggests">
+  <ul class="input-autosuggest" :style="suggestsStyle" v-if="autosuggest" v-show="showSuggests">
     <li v-for="suggest in suggests" @click="_onSuggestSelect(suggest)">
       {{suggest}}
     </li>
@@ -132,9 +132,9 @@ export default {
     },
     shouldAutocomplete() {
       if (typeof this.autosuggest !== 'undefined') {
-        return false;
+        return 'off';
       }
-      return this.autocomplete;
+      return this.autocomplete ? 'on' : 'off';
     },
   },
   methods: {
@@ -213,6 +213,7 @@ export default {
 }
 .input-autosuggest {
   list-style: none;
+  position: absolute;
   padding: 0;
   width: auto;
   z-index: 100;
