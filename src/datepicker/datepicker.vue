@@ -260,6 +260,9 @@ export default {
       this.currDate = moment(date);
       this.formattedValue = date.format(this.format);
     },
+    value(date) {
+      this.selectedDate = moment(date, this.format);
+    },
   },
 };
 </script>
