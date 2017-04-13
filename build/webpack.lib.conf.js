@@ -5,6 +5,7 @@ const webpack = require('webpack');
 const merge = require('webpack-merge');
 const baseWebpackConfig = require('./webpack.base.conf');
 // const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 const env = config.build.env;
 
@@ -37,6 +38,7 @@ const webpackConfig = merge(baseWebpackConfig, {
       },
     }),
     new webpack.optimize.OccurrenceOrderPlugin(),
+    new BundleAnalyzerPlugin(),
     // extract css into its own file
     // new ExtractTextPlugin(utils.assetsPath('css/[name].[contenthash].css')),
   ],
