@@ -33,9 +33,6 @@ export default {
       let comp = 'inputBasic';
       if (this.$slots.before || this.$slots.after) {
         comp = 'inputGroup';
-        if (this.$slots.before) {
-          console.log(this.$slots.before[0]);
-        }
       }
       return comp;
     },

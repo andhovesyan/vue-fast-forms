@@ -76,7 +76,6 @@ export default {
     };
   },
   mounted() {
-    console.log(this.$slots);
     this.setForm();
     if (this.$refs.input) {
       this.isValid = this.$refs.input.validity.valid;
