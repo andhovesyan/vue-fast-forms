@@ -2,7 +2,7 @@
 <div>
   <h1 class="mb-3">Buttons</h1>
   <p>Properties: <code>text</code>, <code>vf-color</code>, <code>vf-size</code>, <code>vf-type</code>, <code>disabled</code>, <code>active</code>, <code>block</code>, <code>href</code>, <code>to</code></p>
-  <p>Events: <code>@click</code>, <code>@dbclick</code>, <code>@focus</code>, <code>@blur</code>
+  <p>Events: <code>@click</code>, <code>@dbclick</code>, <code>@focus</code>, <code>@blur</code></p>
   <doc-section title="Button styling">
     <p>Use <code>vf-color</code> and <code>outline</code> attributes to define button color style:</p>
     <code-block>
@@ -89,7 +89,7 @@
     </code-block>
   </doc-section>
   <doc-section title="Button tags" id="buttonTags">
-    <p>By default <code>vf-btn</code> will render <code>button</code> tag.
+    <p>By default <code>vf-btn</code> will render <code>button</code> tag.</p>
     <p>Define a <code>href</code> attribute, to render <code>&lt;a&gt;</code> tag instead:</p>
     <code-block>
       <div slot="result">
