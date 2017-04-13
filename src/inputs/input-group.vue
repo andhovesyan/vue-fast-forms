@@ -97,10 +97,10 @@ export default {
     inputClass() {
       const classes = [];
       if (this.size) {
-        classes.push('form-control-' + this.size);
+        classes.push(`form-control-${this.size}`);
       }
       if (this.currState) {
-        classes.push('form-control-' + this.currState);
+        classes.push(`form-control-${this.currState}`);
       }
       if (this.block) {
         classes.push('form-text');
