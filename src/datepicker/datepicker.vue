@@ -9,6 +9,7 @@
         :class="{readonly: readonly}"
         :name="name"
         @focus="showCalendar"
+        @blur="close"
         :value="formattedValue"
         :placeholder="placeholder"
         :required="required"
