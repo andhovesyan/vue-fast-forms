@@ -13,6 +13,7 @@
   "dependencies": {
     "bootstrap": "^4.0.0-alpha.6",
     "moment": "^2.18.1",
+    "tether": "^1.4.0",
     "vue": "^2.2.6"
   },
   "devDependencies": {

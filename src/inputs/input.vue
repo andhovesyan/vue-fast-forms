@@ -80,6 +80,12 @@ export default {
     onSuggestSelect: {
       type: Function,
     },
+    formatter: {
+      type: Function,
+    },
+    beforeInput: {
+      type: Function,
+    },
   },
   data() {
     return {
@@ -139,7 +145,10 @@ export default {
   },
   methods: {
     setValue(value) {
+      console.log("VFF SET VAL: ", value);
       this.realVal = value;
+      this.$refs.input.value = value;
+      console.log("VFF SET VAL 2: ", this.realVal);
       this.isValid = this.$refs.input.validity.valid;
     },
     onInput(event) {
@@ -147,6 +156,10 @@ export default {
         return;
       }
       let value = event.target.value;
+      if (this.formatter) {
+        value = this.formatter(value);
+        console.log("VFF: ", value);
+      }
       if (this.autosuggest) {
         this.autosuggest(value).then((suggests) => {
           this.showSuggests = true;
@@ -163,7 +176,7 @@ export default {
     },
     onChange(event) {
       this.onInput(event);
-      this.$emit('change', event.target.value, event);
+      this.$emit('change', this.realVal, event);
     },
     _onSuggestSelect(value) {
       this.showSuggests = false;
@@ -202,6 +215,7 @@ export default {
       }
     },
     value(value) {
+      console.log("VFF WATCH: ", value);
       this.realVal = value;
       this.$emit('input', value);
     },
