@@ -21,11 +21,27 @@ export default {
   props: {
     currDate: null,
     selectedDate: null,
+    weekFirstDay: {
+      type: String,
+      default: 'Mon',
+    },
   },
 
   data() {
+    let weekdays;
+    switch (this.weekFirstDay) {
+      case ('Mon'):
+        weekdays = [ "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun" ]
+        break;
+      case ('Sat'):
+        weekdays = [ "Sat", "Sun", "Mon", "Tue", "Wed", "Thu", "Fri" ]
+        break;
+      case ('Sun'):
+        weekdays = [ "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat" ]
+        break;
+    }
     return {
-      weekdays: moment.weekdaysShort(true),
+      weekdays,
     };
   },
 

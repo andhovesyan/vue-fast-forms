@@ -1,9 +1,12 @@
 {
   "presets": [
     ["env", {
-      "modules": false,
+	    "targets": {
+	    	"browsers": ["last 2 versions", "safari >= 7"],
+	    	"modules": false
+	    }
     }],
-    ["stage-0"]
+    "stage-0"
   ],
-  "plugins": ["lodash"]
+  "plugins": ["lodash", "transform-export-extensions"]
 }

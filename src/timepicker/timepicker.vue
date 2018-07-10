@@ -136,6 +136,7 @@ export default {
     },
   },
   data() {
+    const selectedTime = moment(this.value, 'HH:mm A');
     return {
       selectedDate: moment(this.value, this.format),
       view: null,
@@ -143,8 +144,8 @@ export default {
       formattedValue: null,
       calendarHeight: 0,
       form: null,
-      hours: 0,
-      minutes: 0,
+      hours: selectedTime.hour() || 0,
+      minutes: selectedTime.minutes() || 0,
     };
   },
   computed: {
@@ -200,6 +201,10 @@ export default {
   },
   methods: {
     close() {
+<<<<<<< HEAD
+=======
+      this.$emit('input', this.selectedTime);
+>>>>>>> wenger-hotfixes
       this.view = null;
     },
     showCalendar() {

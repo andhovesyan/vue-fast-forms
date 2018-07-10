@@ -15,6 +15,7 @@
     :required="required"
     :readonly="readonly"
     :disabled="disabled"
+    :title="title"
     @input="onInput"
     @change="onChange"
     @focus="onFocus"
@@ -86,6 +87,9 @@ export default {
     beforeInput: {
       type: Function,
     },
+    title: {
+      type: String,
+    },
   },
   data() {
     return {
@@ -106,6 +110,11 @@ export default {
       this.form.$emit('input_added', this);
     }
     this.suggestsStyle.height = this.$el.offsetHeight - 1;
+    document.addEventListener('click', ({ target }) => {
+      if (!this.$el.contains(target) && target !== this.$el) {
+        this.showSuggests = false;
+      }
+    });
   },
   computed: {
     isGroup() {
@@ -158,9 +167,8 @@ export default {
       let value = event.target.value;
       if (this.formatter) {
         value = this.formatter(value);
-        console.log("VFF: ", value);
       }
-      if (this.autosuggest) {
+      if (this.autosuggest && this.realVal !== value) {
         this.autosuggest(value).then((suggests) => {
           this.showSuggests = true;
           this.suggests = suggests;
@@ -176,7 +184,7 @@ export default {
     },
     onChange(event) {
       this.onInput(event);
-      this.$emit('change', this.realVal, event);
+      this.$emit('change', event.target.value, event);
     },
     _onSuggestSelect(value) {
       this.showSuggests = false;
@@ -206,6 +214,9 @@ export default {
     onReset(event) {
       this.$emit('reset', event);
     },
+    onBlur(event) {
+      this.$emit('blur', event);
+    },
   },
   watch: {
     currState() {
@@ -215,7 +226,6 @@ export default {
       }
     },
     value(value) {
-      console.log("VFF WATCH: ", value);
       this.realVal = value;
       this.$emit('input', value);
     },

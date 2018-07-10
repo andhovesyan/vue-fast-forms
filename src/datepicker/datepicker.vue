@@ -9,7 +9,11 @@
         :class="{readonly: readonly}"
         :name="name"
         @focus="showCalendar"
+<<<<<<< HEAD
         @keydown.tab="close"
+=======
+        @blur="close"
+>>>>>>> wenger-hotfixes
         :value="formattedValue"
         :placeholder="placeholder"
         :required="required"
@@ -27,6 +31,10 @@
       <component :is="currViewComp"
         :curr-date="currDate"
         :selected-date="selectedDate"
+<<<<<<< HEAD
+=======
+        :week-first-day="weekFirstDay"
+>>>>>>> wenger-hotfixes
         @select-day="selectDate"
         @select-month="selectMonth"
         @select-year="selectYear"
@@ -92,6 +100,13 @@ export default {
       type: Boolean,
       default: false,
     },
+<<<<<<< HEAD
+=======
+    weekFirstDay: {
+      type: String,
+      default: 'Mon',
+    },
+>>>>>>> wenger-hotfixes
   },
   data() {
     return {
@@ -261,8 +276,13 @@ export default {
       this.currDate = moment(date);
       this.formattedValue = date.format(this.format);
     },
+<<<<<<< HEAD
     value(date) {
       this.selectedDate = moment(date, this.format);
+=======
+    value(val) {
+      this.setValue(val);
+>>>>>>> wenger-hotfixes
     },
   },
 };
