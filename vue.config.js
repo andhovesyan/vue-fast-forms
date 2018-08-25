@@ -6,6 +6,9 @@ function resolve (dir) {
 
 module.exports = {
   configureWebpack: {
+    output: {
+      libraryExport: 'default'
+    },
     resolve: {
       extensions: ['.js', '.vue', '.json'],
       alias: {
