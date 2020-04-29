@@ -34,7 +34,7 @@
     "@vue/cli-service": "3.11.0",
     "@vue/eslint-config-airbnb": "^3.0.0-rc.3",
     "babel-preset-stage-0": "^6.24.1",
-    "jquery": "3.4.1",
+    "jquery": "3.5.0",
     "node-sass": "^4.9.0",
     "prismjs": "^1.15.0",
     "pug": "^2.0.3",
